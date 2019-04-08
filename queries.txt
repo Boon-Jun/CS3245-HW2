@@ -34,3 +34,9 @@ NOT (the AND power)
 hot OR power
 NOT NOT (hot OR power)
 NOT(the AND power) OR (skill AND man OR cat)
+bill OR Gates AND (vista OR XP) AND NOT mac
+bahia AND bill AND Gates
+(the OR zone) AND NOT at
+kimjungun OR bahia
+DISPUTE OR TANGLES OR WELBILT AND NOT ORS
+kimjungun OR bahia AND ANDS

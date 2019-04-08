@@ -18,12 +18,12 @@ def executeBasicSearch(queryString, term_dict, postings):
     #Process the query after converting it to postfix notation
     for x in range(len(postfixList)):
         item = postfixList[x]
-        if item == 'not':
+        if item == 'NOT':
             operand = operandsStack.pop()
             if type(operand) is not list:
                 operand = loadPostingList(operand, term_dict, postings)
             operandsStack.append(notOp(getAllDocIds(postings), operand))
-        elif item == 'and':
+        elif item == 'AND':
             operand1 = operandsStack.pop()
             operand2 = operandsStack.pop()
             if type(operand1) is not list:
@@ -31,7 +31,7 @@ def executeBasicSearch(queryString, term_dict, postings):
             if type(operand2) is not list:
                 operand2 = loadPostingList(operand2, term_dict, postings)
             operandsStack.append(andOp(operand1, operand2))
-        elif item == 'or':
+        elif item == 'OR':
             operand1 = operandsStack.pop()
             operand2 = operandsStack.pop()
             if type(operand1) is not list:
@@ -67,7 +67,7 @@ def executeOptimizedSearch(queryString, term_dict, postings):
     #Process the query after converting it to postfix notation
     for x in range(len(postfixList)):
         item = postfixList[x]
-        if item == 'not':
+        if item == 'NOT':
             operand = operandsStack.pop()
 
             # "CombinedTerm" simply stores the 'NOT' operator and operand together
@@ -80,7 +80,7 @@ def executeOptimizedSearch(queryString, term_dict, postings):
             # smaller postings list.)
 
             operandsStack.append(NotCombinedTerm(operand))
-        elif item == 'and':
+        elif item == 'AND':
             operand1 = operandsStack.pop()
             operand2 = operandsStack.pop()
             finalOperand = None
@@ -103,7 +103,7 @@ def executeOptimizedSearch(queryString, term_dict, postings):
                 finalCombinedTerm = AndCombinedTerm(operand1).addNewTerm(operand2)
             operandsStack.append(finalCombinedTerm)
 
-        elif item == 'or':
+        elif item == 'OR':
             operand1 = operandsStack.pop()
             operand2 = operandsStack.pop()
 

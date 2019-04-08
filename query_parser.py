@@ -10,7 +10,7 @@ stemmer = PorterStemmer()
 # Operator priority for '(' and ')' will be implicitly considered
 # within the implementation of the algorithm itself, and hence will
 # not be stored over here.
-operatorPriority = {'not': 2, 'and': 1, 'or': 0}
+operatorPriority = {'NOT': 2, 'AND': 1, 'OR': 0}
 
 def isOperator(op):
     return op in operatorPriority or op == ')' or op == "("
@@ -36,7 +36,7 @@ def queryStringToPostFixList(queryString):
     #Adds spaces before and after brackets to make string tokenization simpler
     spacedOutString = insertSpaceBeforeAndAfterBrackets(queryString)
 
-    tokenizedString = [word.lower() if isOperator(word) else stemmer.stem(word.lower()) for word in spacedOutString.split()]
+    tokenizedString = [word.upper() if isOperator(word.upper()) else stemmer.stem(word.lower()) for word in spacedOutString.split()]
 
     for token in tokenizedString:
         if isOperator(token):
